@@ -88,7 +88,7 @@ public class StringCompression {
 
 	/**
 	 * 2단계)
-	 * 	2차원적인 for 문으로 변경
+	 * 	1단계에서 작성한 1차원적인 기억법을 for문에 적용시켜보기
 	 * 	ex)
 	 * 		input 				: aabbacc
 	 * 		step (인덱스 변화) 	: 1,2,3,4,5,6
@@ -96,8 +96,15 @@ public class StringCompression {
 	 * @param question
 	 * @return
 	 */
-	public static int answer2(String question){
+	public static int answerLevel2 (String question){
 		int result = 0;
+
+		// 	substring(int beginIndex)
+		for (int step = 1; step < question.length(); step++){
+			String substring = question.substring(0,step+1);
+			System.out.println(substring);
+		}
+		System.out.println();
 		return result;
 	}
 
@@ -109,6 +116,7 @@ public class StringCompression {
 		String question4 = "abcabcabcabcdededededede";
 		String question5 = "xababcdcdababcdcd";
 
+		System.out.println("**************");
 		System.out.println("============== question1");
 		answerLevel1(question1);
 		System.out.println("============== question2");
@@ -119,5 +127,10 @@ public class StringCompression {
 		answerLevel1(question4);
 		System.out.println("============== question5");
 		answerLevel1(question5);
+		System.out.println("\n");
+
+		System.out.println("**************");
+		answerLevel2(question1);
+		answerLevel2(question2);
 	}
 }
