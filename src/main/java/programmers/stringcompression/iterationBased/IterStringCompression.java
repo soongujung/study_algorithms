@@ -1,18 +1,24 @@
 package programmers.stringcompression.iterationBased;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class IterStringCompression {
 
 	public static int answer(String question){
 		int result = 0;
 		Map<String, Integer> countMap = new HashMap<String, Integer>();
+		Set<String> compressed_set = new HashSet<String>();
 
 		for (int step = 1; step<question.length(); step++){
 			int count = 0;
-			String prev = question.substring(0, step);
 			int subLimit = (int) Math.floor(question.length() / step);
+
+			String prev = question.substring(0, step);
+			String append_str = "";
+			String temp = "";
 
 			for (int i = 1; i<subLimit+1 && subLimit!=1; i++){
 				// beginIndex) substring 의 beginIndex
@@ -30,6 +36,7 @@ public class IterStringCompression {
 				// 찾으려는 단위문자열인 prev 가 step(i) 에 대한 단위문자열인 inner_current와 같은 경우 갯수 카운팅 +1
 				if(prev.equals(inner_current)){
 					count++;
+					temp = inner_current;
 					countMap.put(inner_current, count);
 				}
 
@@ -49,13 +56,26 @@ public class IterStringCompression {
 					 * 	이 경우 문자열 길이 2인 검사를 할 대상을 바꿔서 한번 더 검사를 할 필요가 있다.
 					 *  count 역시 초기화 해줘야 한다. 비교할 문자열을 변경("bc" -> "de")했기 때문에 새로 카운트한다.
 					 */
+					temp = prev;
+					append_str = append_str + (count == 1 ? temp : count + temp);
+
 					prev = inner_current;
 					countMap.put(inner_current, count);
 					count = 1;
 				}
+				if (i == subLimit){
+					append_str = append_str + (count == 1 ? temp : count + temp);
+				}
 			}
+
 			System.out.println("answer :: " + countMap.toString());
+			if(!"".equals(append_str)){
+				compressed_set.add(append_str);
+			}
+//			System.out.println("compressed_set :: " + compressed_set);
 		}
+
+		System.out.println("compressed_set :: " + compressed_set);
 
 		return result;
 	}
