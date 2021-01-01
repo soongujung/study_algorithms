@@ -50,14 +50,12 @@ public class IterStringCompression {
 					 *  count 역시 초기화 해줘야 한다. 비교할 문자열을 변경("bc" -> "de")했기 때문에 새로 카운트한다.
 					 */
 					prev = inner_current;
+					countMap.put(inner_current, count);
 					count = 1;
 				}
-				countMap.put(inner_current, count);
 			}
 			System.out.println("answer :: " + countMap.toString());
-			count = 0;
 		}
-
 
 		return result;
 	}
