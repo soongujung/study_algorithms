@@ -5,13 +5,29 @@ public class IterStringCompression {
 	public static int answer(String question){
 		int result = 0;
 
-		for (int step = 0; step < question.length(); step++){
-			String compressedStr = "";
-			String prev = question.substring(0, step);
+		for (int step = 1; step<question.length(); step++){
+			String first = question.substring(0, step);
+			int subLimit = (int) Math.floor(question.length() / step);
+			System.out.println("first :: " + first);
 
-			// ...
+			for (int i = 1; i<=subLimit; i++){
+				int beginIndex = (i-1)*step;
+				int endIndex = (i*step) > question.length() ? question.length() : i*step;
 
-			int count = 0;
+				String next = "";
+
+				if (endIndex == question.length()){
+					next = question.substring(beginIndex);
+				}
+				else if (endIndex > question.length()){
+					next = question.substring(beginIndex);
+				}
+				else {
+					next = question.substring(beginIndex, endIndex);
+				}
+
+				System.out.println("next ("+ i +") :: " + next);
+			}
 		}
 
 		return result;
@@ -27,8 +43,6 @@ public class IterStringCompression {
 
 		System.out.println("============== question1");
 		System.out.println(answer(question1));
-//		System.out.println("============== question2");
-//		answerLevel1(question2);
 	}
 
 }
