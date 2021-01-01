@@ -14,7 +14,7 @@ public class IterStringCompression {
 			String prev = question.substring(0, step);
 			int subLimit = (int) Math.floor(question.length() / step);
 
-			for (int i = 1; i<=subLimit && subLimit!=1; i++){
+			for (int i = 1; i<subLimit+1 && subLimit!=1; i++){
 				// beginIndex) substring 의 beginIndex
 				// substring 을 하는 단위는 step 의 배수로 늘려나간다.
 				int beginIndex = (i-1)*step;
@@ -52,6 +52,7 @@ public class IterStringCompression {
 					prev = inner_current;
 					count = 1;
 				}
+				countMap.put(inner_current, count);
 			}
 			System.out.println("answer :: " + countMap.toString());
 			count = 0;
