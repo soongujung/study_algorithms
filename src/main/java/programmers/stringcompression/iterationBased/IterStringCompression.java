@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class IterStringCompression {
 
-	public static int answer(String question){
+	public static int answer(String question) throws Exception {
 		int result = 0;
 		Map<String, Integer> countMap = new HashMap<String, Integer>();
 		Set<String> compressed_set = new HashSet<String>();
@@ -74,14 +74,20 @@ public class IterStringCompression {
 			}
 //			System.out.println("compressed_set :: " + compressed_set);
 		}
-
 		System.out.println("compressed_set :: " + compressed_set);
+
+		int min = compressed_set.stream()
+			.mapToInt(v -> v.length())
+			.min()
+			.orElseThrow(Exception::new);
+
+		System.out.println("min compressed :: " + min);
 
 		return result;
 	}
 
 
-	public static void main (String [] args){
+	public static void main (String [] args) throws Exception {
 		String question1 = "aabbaccc";
 		String question2 = "ababcdcdababcdcd";
 		String question3 = "abcabcdede";
