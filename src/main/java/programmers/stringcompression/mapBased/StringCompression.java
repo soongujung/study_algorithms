@@ -98,11 +98,23 @@ public class StringCompression {
 	 */
 	public static int answerLevel2 (String question){
 		int result = 0;
+		Map<String, Integer> indexMap = new HashMap<String, Integer>();
+		Map<String, Integer> wordMap = new HashMap<String, Integer>();
+		List<String> appearance = new ArrayList<String>();	// 각 wordKey 의 출현 위치를 기억하려는 목표 ( ex. [0 -> 2 -> 4 -> 5]
+		String wordKey = "";
 
 		// 	substring(int beginIndex)
 		for (int step = 1; step < question.length(); step++){
-			String substring = question.substring(0,step+1);
-			System.out.println(substring);
+			String current = question.substring(0,step);
+			String next = question.substring(step, step + step);
+			System.out.println("(step, current) :: " + current + ", " + next);
+			wordKey = step + wordKey;
+
+			if(!indexMap.containsKey(current)){
+				indexMap.put(current, step);
+			}
+
+
 		}
 		System.out.println();
 		return result;
@@ -130,7 +142,9 @@ public class StringCompression {
 		System.out.println("\n");
 
 		System.out.println("**************");
+		System.out.println("question1 :: " + question1);
 		answerLevel2(question1);
+		System.out.println("question2 :: " + question2);
 		answerLevel2(question2);
 	}
 }
