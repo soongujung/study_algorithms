@@ -8,5 +8,15 @@
   <artifactId>study_algorithm</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <properties>
+    <kotlin.version>1.4.21</kotlin.version>
+  </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+  </dependencies>
 </project>
