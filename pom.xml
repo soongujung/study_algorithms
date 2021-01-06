@@ -7,6 +7,11 @@
   <groupId>org.example</groupId>
   <artifactId>study_algorithm</artifactId>
   <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <kotlin.version>1.4.30-M1</kotlin.version>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
@@ -19,18 +24,6 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <properties>
-    <kotlin.version>1.4.21</kotlin.version>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -38,5 +31,50 @@
       <artifactId>kotlin-stdlib</artifactId>
       <version>${kotlin.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-test</artifactId>
+      <version>${kotlin.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
   </dependencies>
+
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>bintray.kotlin.eap</id>
+      <name>Bintray Kotlin EAP Repository</name>
+      <url>https://dl.bintray.com/kotlin/kotlin-eap</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>bintray.kotlin.eap</id>
+      <name>Bintray Kotlin EAP Repository</name>
+      <url>https://dl.bintray.com/kotlin/kotlin-eap</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
