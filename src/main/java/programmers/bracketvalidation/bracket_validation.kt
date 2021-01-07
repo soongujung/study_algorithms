@@ -43,20 +43,23 @@ fun checkIfOk(input: String): Boolean {
     val length = input.length
     var openBracketCnt : Int = 0
     var closeBracketCnt : Int = 0
-    var result : Boolean = false
+    var result : Boolean = true
 
     for(i in 0..length-1){
         var strAt = input.get(i).toString()
         if(strAt.equals(")")){
-            openBracketCnt = openBracketCnt + 1
+            closeBracketCnt += 1
         }
         else{
             if(closeBracketCnt > openBracketCnt){
+                result = false
                 break
             }
-            closeBracketCnt = closeBracketCnt + 1
+            openBracketCnt += 1
         }
     }
+
+    if(closeBracketCnt != openBracketCnt) result = false
 
     return result
 }
@@ -73,11 +76,11 @@ fun main(args: Array<String>){
     var input8: String = "(()"
 
     // 테스트
-//    testBracketBalancedIndex()
-//    println("")
-//    testCheckIfOk()
+    testBracketBalancedIndex()
+    println("")
+    testCheckIfOk()
 
-    solution(input8)
+//    solution(input8)
 }
 
 fun solution (question : String) : String{
@@ -101,7 +104,6 @@ fun solution (question : String) : String{
     // 3. 올바른 문자열인가? 체크
     val testBracket : Boolean = checkIfOk(u)
     println("올바른 문자열인가요? :: ${testBracket}")
-    
 
     return result
 }
@@ -141,19 +143,35 @@ fun testCheckIfOk(){
     val input3: String = "()))("
     val input4: String = "()))"
     val input5: String = "())"
+    var input6: String = "((()))"
+    var input7: String = "((())"
+    var input8: String = "(()"
+    var input9: String = "()"
 
     val test1 = checkIfOk(input1)
-    println("test #1 :: ${test1}")
+    println("test #1, ${input1}         :: ${test1}")
 
     val test2 = checkIfOk(input2)
-    println("test #2 :: ${test2}")
+    println("test #2, ${input2}         :: ${test2}")
 
     val test3 = checkIfOk(input3)
-    println("test #3 :: ${test3}")
+    println("test #3, ${input3}         :: ${test3}")
 
     val test4 = checkIfOk(input4)
-    println("test #4 :: ${test4}")
+    println("test #4, ${input4}         :: ${test4}")
 
     val test5 = checkIfOk(input5)
-    println("test #5 :: ${test5}")
+    println("test #5, ${input5}         :: ${test5}")
+
+    val test6 = checkIfOk(input6)
+    println("test #6, ${input6}         :: ${test6}")
+
+    val test7 = checkIfOk(input7)
+    println("test #7, ${input7}         :: ${test7}")
+
+    val test8 = checkIfOk(input8)
+    println("test #8, ${input8}         :: ${test8}")
+
+    val test9 = checkIfOk(input9)
+    println("test #9, $input9         :: $test9")
 }
