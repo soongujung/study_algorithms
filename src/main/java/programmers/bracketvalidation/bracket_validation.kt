@@ -74,15 +74,22 @@ fun main(args: Array<String>){
     var input6: String = "((()))"
     var input7: String = "((())"
     var input8: String = "(()"
+    var input9: String = "()"
 
-    // 테스트
-    testBracketBalancedIndex()
-    println("")
-    testCheckIfOk()
+    println("\n\n")
+    // TODO:: 테스트코드로 이관하기
+    // 이것도 테스트 코드로 이관할 예정
+//    var result = solution(input8)
+//    var result = solution(input1)
 
-//    solution(input8)
+    var result = solution(")(")
+    println("*******")
+    println("result = $result")
 }
 
+/**
+ * TODO:: 설명 추가 예정
+ */
 fun solution (question : String) : String{
     var result: String = ""
 
@@ -96,82 +103,38 @@ fun solution (question : String) : String{
     var u = question.substring(0, divIndex+1)
     var v = question.substring(divIndex+1, question.length)
 
-    println("split Index :: ${divIndex+1}")
     println("input :: ${question}")
-    println("u :: ${u}")
-    println("v :: ${v}")
+    println("나누려는 문자열의 기준 인덱스 :: ${divIndex+1}")
+    println("문자열 'u', 'v'로 분리합니다... u=$u , v=$v")
 
     // 3. 올바른 문자열인가? 체크
     val testBracket : Boolean = checkIfOk(u)
-    println("올바른 문자열인가요? :: ${testBracket}")
+    println("문자열 'u'는 올바른 문자열인가요? :: ${testBracket} \n\n")
 
-    return result
-}
+    // 3. u 가 올바른 괄호 문자열이라면 문자열 v 에 대해 1단계 부터 다시 수행.
+    if(testBracket == true){
+        // 3-1. 문자열 v 에 대해 1단계부터 다시 수행
+        return u + solution(v)
+    }
+    // 4. u 가 올바른 괄호 문자열이 아니라면
+    else{
+        // 문자열 v 에 대해 1단계 부터 재귀적으로 수행한 결과문자열을 얻는다.
+        // 문자열 u의 첫번째, 마지막 문자를 제거한다
+        // 문자열 u의 나머지 문자열의 괄호방향을 뒤집는다. --- a)
+        // 문자열 u의 첫번째, 마지막 문자의 순서를 거꾸로 해서  a)의 문자의 양 끝에 붙인다.
+        //   lastChar + a) + firstChar
+        // > [lastChar + a) + firstChar] + v
+        // 첫번째 u + 첫번째 v
+        //          ( 두번째 u : [lastChar + a) + firstChar] +  두번째 v )
 
-fun testBracketBalancedIndex() : Unit{
-    val input1: String = "()))((()"
-    val input2: String = "()))(("
-    val input3: String = "()))("
-    val input4: String = "()))"
-    val input5: String = "())"
-    var input6: String = "((()))"
-    var input7: String = "((())"
-    var input8: String = "(()"
+        var strippedString: String = u.substring(1, u.length-1)
+        var firstChar   = u.substring(0,1)
+        var lastChar    = u.substring(u.length-1, u.length)
+        var invertedString: String = strippedString.reversed() // strippedString을 뒤집는다.
 
-    val result1 = divideIntoBalancedIndex(input1)
-    val result2 = divideIntoBalancedIndex(input2)
-    val result3 = divideIntoBalancedIndex(input3)
-    val result4 = divideIntoBalancedIndex(input4)
-    val result5 = divideIntoBalancedIndex(input5)
-    val result6 = divideIntoBalancedIndex(input6)
-    val result7 = divideIntoBalancedIndex(input7)
-    val result8 = divideIntoBalancedIndex(input8)
 
-    println("bracket index #1 :: ${result1}")
-    println("bracket index #2 :: ${result2}")
-    println("bracket index #3 :: ${result3}")
-    println("bracket index #4 :: ${result4}")
-    println("bracket index #5 :: ${result5}")
-    println("bracket index #6 :: ${result6}")
-    println("bracket index #7 :: ${result7}")
-    println("bracket index #8 :: ${result8}")
-}
-
-fun testCheckIfOk(){
-    val input1: String = "()))((()"
-    val input2: String = "()))(("
-    val input3: String = "()))("
-    val input4: String = "()))"
-    val input5: String = "())"
-    var input6: String = "((()))"
-    var input7: String = "((())"
-    var input8: String = "(()"
-    var input9: String = "()"
-
-    val test1 = checkIfOk(input1)
-    println("test #1, ${input1}         :: ${test1}")
-
-    val test2 = checkIfOk(input2)
-    println("test #2, ${input2}         :: ${test2}")
-
-    val test3 = checkIfOk(input3)
-    println("test #3, ${input3}         :: ${test3}")
-
-    val test4 = checkIfOk(input4)
-    println("test #4, ${input4}         :: ${test4}")
-
-    val test5 = checkIfOk(input5)
-    println("test #5, ${input5}         :: ${test5}")
-
-    val test6 = checkIfOk(input6)
-    println("test #6, ${input6}         :: ${test6}")
-
-    val test7 = checkIfOk(input7)
-    println("test #7, ${input7}         :: ${test7}")
-
-    val test8 = checkIfOk(input8)
-    println("test #8, ${input8}         :: ${test8}")
-
-    val test9 = checkIfOk(input9)
-    println("test #9, $input9         :: $test9")
+        var uResult = lastChar + invertedString + firstChar
+        var vResult = solution(v)
+        return uResult + vResult
+    }
 }
