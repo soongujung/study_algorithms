@@ -130,9 +130,21 @@ fun solution (question : String) : String{
         var strippedString: String = u.substring(1, u.length-1)
         var firstChar   = u.substring(0,1)
         var lastChar    = u.substring(u.length-1, u.length)
-        var invertedString: String = strippedString.reversed() // strippedString을 뒤집는다.
 
+        // var invertedString: String = strippedString.reversed() // strippedString을 뒤집는다.
 
+        val charArray : CharArray= strippedString.toCharArray()
+
+        for(i in charArray.indices){
+            if(charArray[i].equals('(')){
+                charArray[i] = ')'
+            }
+            else{
+                charArray[i] = ')'
+            }
+        }
+
+        var invertedString: String = String(charArray) // strippedString 을 뒤집은 문자열
         var uResult = lastChar + invertedString + firstChar
         var vResult = solution(v)
         return uResult + vResult

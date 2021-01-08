@@ -64,6 +64,88 @@ class BracketTest {
     }
 
     @Test
+    @DisplayName("문자열 순회 #1 ")
+    fun testIterateString1(): Unit{
+        var str1: String = "apple"
+        for (s in str1){
+            println("s = $s")
+        }
+    }
+
+    @Test
+    @DisplayName("문자열 순회 #2")
+    fun testIterateString2(): Unit{
+        var str1: String = "apple"
+        for (i in 0 until str1.length){
+            println(str1[i])
+        }
+    }
+
+    // 참고자료 : https://www.techiedelight.com/replace-character-specific-index-string-kotlin/
+    @Test
+    @DisplayName("StringBuilder :: 특정 인덱스의 특정 문자열 치환")
+    fun testReplaceChar1(): Unit{
+        var str1: String = "abcdefg"
+        val chars = StringBuilder(str1).also { it.setCharAt(0,'b') }
+        str1 = chars.toString()
+        println("str1 = ${str1}")
+    }
+
+    @Test
+    @DisplayName("StringBuilder :: 문자열 내의 모든 문자 순회하며 치환")
+    fun testReplaceChar2(): Unit{
+        var str1: String = ")))(()"
+
+        for(i in 0..str1.length){
+            if("(".equals(str1.get(i).toString())){
+                str1 = StringBuilder(str1).let{it.setCharAt(i, ')')}.toString()
+            }
+        }
+
+        println("str1 :: $str1")
+    }
+
+    // 참고자료 : https://www.techiedelight.com/replace-character-specific-index-string-kotlin/
+    @Test
+    @DisplayName("CharArray 타입 :: 문자열 내의 모든 문자열을 CharArray로 순회")
+    fun testIterateCharArray(): Unit{
+        var str1: String = "abcdefg"
+        var charArray: CharArray = str1.toCharArray()
+//        for(i in 0..charArray.size){
+        for(i in 0 until charArray.size){
+            println("i = $i")
+        }
+    }
+
+    @Test
+    @DisplayName("CharArray 타입 :: 문자열 내의 모든 문자열을 치환")
+    fun testReplaceChar3(): Unit{
+        var str1: String = ")))(()"
+        var charArray: CharArray = str1.toCharArray()
+
+        for(i in 0 until charArray.size){
+            if(charArray[i].equals(')')){
+                charArray[i] = '('
+            }
+            else{
+                charArray[i] = ')'
+            }
+        }
+
+        val reversedCharArray = String(charArray)
+
+        println("charArray :: ${reversedCharArray}")
+    }
+
+    @Test
+    @DisplayName("문자열 치환 #1")
+    fun testReplaceString1() : Unit{
+        var str1: String = "apple"
+        str1 = str1.replace("a","b")
+        println("str = $str1")
+    }
+
+    @Test
     @DisplayName("앞뒤문자를 제거하고 문자의 괄호방향을 뒤집기 테스트해보기")
     fun testInverseStringAndStripString(): Unit {
         var input: String = ")bbb("
