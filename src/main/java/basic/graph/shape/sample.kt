@@ -1,4 +1,4 @@
-package basic.adjacent_list_based
+package basic.graph.shape
 
 
 data class Node (
