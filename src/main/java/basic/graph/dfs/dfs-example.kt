@@ -20,13 +20,14 @@ fun main (args: Array<String>) : Unit {
     graph.pushToStack(start)
     graph.printStack()
 
-    val queue: Queue<Vertex> = LinkedList<Vertex>()
+    /** 방문노드를 print 문으로 출력하기 위한 변수 */
+    val printQueue: Queue<Vertex> = LinkedList<Vertex>()
 
     var cnt: Int = 0
 
     while(true){
         val pop: Vertex = graph.pop()
-        queue.offer(pop)
+        printQueue.offer(pop)    // 결과 print 를 위해 queue 에 방문경로 저장
         graph.printStack()
 
         val neighbors = pop.adjacentList
@@ -45,7 +46,7 @@ fun main (args: Array<String>) : Unit {
         if(isAllVisited) break
     }
 
-    for(v in queue){
+    for(v in printQueue){
         print("${v.label} -> ")
     }
 
