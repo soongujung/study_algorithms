@@ -17,7 +17,8 @@ fun main(args : Array<String>) : Unit {
     graph.addEdge(from = v10, to = v20).addEdge(from = v10, to = v11)
     graph.addEdge(from = v01, to = v11).addEdge(from = v01, to = v02)
     graph.addEdge(from = v20, to = v21)
-    graph.addEdge(from = v21, to = v11)
+    graph.addEdge(from = v21, to = v11).addEdge(from = v11, to = v21)
     graph.addEdge(from = v02, to = v12)
+    graph.addEdge(from = v11, to = v12).addEdge(from = v12, to = v11)
     graph.addEdge(from = v12, to = v22)
 }
