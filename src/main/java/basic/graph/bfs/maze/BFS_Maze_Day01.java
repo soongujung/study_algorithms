@@ -1,6 +1,8 @@
 package basic.graph.bfs.maze;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BFS_Maze_Day01 {
@@ -14,12 +16,30 @@ public class BFS_Maze_Day01 {
 		{0,1,1}
 	};
 
+	public static boolean [][] visitedMap = {
+		{false, false, false},
+		{false, false, false},
+		{false, false, false}
+	};
+
 	public static int [] diffX = {-1, 1, 0, 0};		// 상,하,좌,우
 	public static int [] diffY = {0, 0, -1, 1};		// 상,하,좌,우
+
+	public static List<Vertex> getVertexDiffList(){
+		List<Vertex> diffList = new ArrayList<>();
+
+		diffList.add(new Vertex(-1, 0));
+		diffList.add(new Vertex(1, 0));
+		diffList.add(new Vertex(0, -1));
+		diffList.add(new Vertex(0, 1));
+
+		return diffList;
+	}
 
 	static class Vertex {
 		public static int x;
 		public static int y;
+
 		Vertex (int x, int y){
 			this.x = x;
 			this.y = y;
@@ -57,6 +77,7 @@ public class BFS_Maze_Day01 {
 			Vertex temp = queue.poll();
 			int x = temp.getX();
 			int y = temp.getY();
+			visitedMap[x][y] = true;
 
 			for (int i=0; i<4; i++){
 				int searchX = x + diffX[i];
@@ -67,10 +88,12 @@ public class BFS_Maze_Day01 {
 				// 벽인 경우 무시
 				if(graph[searchX][searchY] == 0) continue;
 
-				// TODO :: 디버깅 필요
+				// 길이 역시도 업데이트 하도록 수정
 				if(graph[searchX][searchY] == 1) {
-					graph[searchX][searchY] = graph[x][y] +1;
-					queue.offer(new Vertex(searchX, searchY));
+					if(visitedMap[searchX][searchY] == false){
+						graph[searchX][searchY] = graph[searchX][searchY] + graph[x][y];
+						queue.offer(new Vertex(searchX, searchY));
+					}
 				}
 			}
 		}
