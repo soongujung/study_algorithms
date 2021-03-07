@@ -1,4 +1,5 @@
 #!/bin/zsh
+# docker container repl 접속
 
 name_codingtest_mysql='codingtest-mariadb'
 

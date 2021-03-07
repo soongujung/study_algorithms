@@ -1,4 +1,5 @@
 #!/bin/zsh
+# docker container 중지 및 볼륨 삭제
 
 name_codingtest_mysql='codingtest-mariadb'
 
